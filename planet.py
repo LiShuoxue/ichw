@@ -14,7 +14,7 @@ a=[30,60,105,165,240,330]
 e=[0.206,0.007,0.017,0.093,0.048,0.056]
 
 def c(t):
-    """ c(t) is the focal length of an elliptical orbit.
+    """ c(t) is the focal length of the elliptical orbit.
     """
     return a[t]*e[t]
 
