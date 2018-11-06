@@ -47,8 +47,8 @@ def run():
     k=1
     while (1):
         for x in range(6):
-            planet[x].goto(a[x]*math.cos(k/a[x])+c(x),\
-                            b(x)*math.sin(k/a[x]))
+            planet[x].goto(a[x]*math.cos(2*k/(a[x]**1.5))+c(x),\
+                            b(x)*math.sin(2*k/(a[x]**1.5)))
             k=k+1
 
 def main():
