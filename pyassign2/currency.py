@@ -110,9 +110,12 @@ def testB():
     test_has_error()
     
 def testC():
-    assert currency_response('USD','EUR',2.5)=='{ "from" : "2.5 United States Dollars", "to" : "2.1589225 Euros", "success" : true, "error" : "" }'
-    assert currency_response('YMMD','EUR',2.5)=='{ "from" : "", "to" : "", "success" : false, "error" : "Source currency code is invalid." }'
-    assert currency_response('CNY','VND',1.0)=='{ "from" : "1 Chinese Yuan", "to" : "3373.6019135739 Vietnamese Dong", "success" : true, "error" : "" }'
+    assert currency_response('USD','EUR',2.5)==\
+    '{ "from" : "2.5 United States Dollars", "to" : "2.1589225 Euros", "success" : true, "error" : "" }'
+    assert currency_response('YMMD','EUR',2.5)==\
+    '{ "from" : "", "to" : "", "success" : false, "error" : "Source currency code is invalid." }'
+    assert currency_response('CNY','VND',1.0)==\
+    '{ "from" : "1 Chinese Yuan", "to" : "3373.6019135739 Vietnamese Dong", "success" : true, "error" : "" }'
     
 def test_iscurrency():
     assert True==iscurrency('EUR')
