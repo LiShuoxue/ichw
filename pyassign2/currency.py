@@ -61,9 +61,11 @@ def iscurrency(currency):
 
 def exchange(currency_from, currency_to, amount_from):
     """返回货币的兑换值。且为浮点数。"""
-    return float(before_space(get_to(currency_response(\
-           currency_from, currency_to, amount_from))))
-
+    if iscurrency(currency_from)==True:
+        return float(before_space(get_to(currency_response(\
+            currency_from, currency_to, amount_from))))
+    else:
+        print('Error')
 
 """以下代码用于测试。
 """
