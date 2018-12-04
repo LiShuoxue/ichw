@@ -8,6 +8,7 @@ __email__  = "1800011839@pku.edu.cn"
 """
 import turtle
 import sys
+import random
 sys.getrecursionlimit=100000
 
 def init_wall(m,n):
@@ -149,13 +150,15 @@ def draw_a_method(method,m,n,x,y):
         colorlist.append('#'+'{:0>6s}'.format('{:X}'.format(p)))
     for brick in method:
         draw_a_brick(brick,colorlist[method.index(brick)%len(colorlist)],m,n)
-
+        
 def major(m,n,x,y):
-    """该函数在打印出所有密铺结果之后，将其在turtle上可视化。
+    """该函数在打印出所有密铺结果，将其中任意一个在turtle上可视化。
     """
-    output(m,n,x,y)
+    wall=init_wall(m,n)
     draw_wall(m,n)
-    draw_a_method(final_methods(wall,x,y)[-1],m,n,x,y)
+    methods=final_methods(wall,x,y)
+    draw_a_method(methods[random.randrange(len(methods))],m,n,x,y)
+    output(m,n,x,y)
 
 def main():
     major(int(input('墙长度',)),int(input('墙宽度',)),\
