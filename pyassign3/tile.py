@@ -150,22 +150,12 @@ def draw_a_method(method,m,n,x,y):
     for brick in method:
         draw_a_brick(brick,colorlist[method.index(brick)%len(colorlist)],m,n)
 
-def draw_methods(m,n,x,y):
-    """依次画出不同的密铺方法。
-    """
-    wall=init_wall(m,n)
-    screen=turtle.Screen()
-    draw_wall(m,n)
-    for k in range(len(final_methods(wall,x,y))):
-        draw_a_method(final_methods(wall,x,y)[k],m,n,x,y)
-    turtle.exitonclick()
-
 def major(m,n,x,y):
     """该函数在打印出所有密铺结果之后，将其在turtle上可视化。
     """
     output(m,n,x,y)
     draw_wall(m,n)
-    draw_methods(m,n,x,y)
+    draw_a_method(final_methods(wall,x,y)[-1],m,n,x,y)
 
 def main():
     major(int(input('墙长度',)),int(input('墙宽度',)),\
