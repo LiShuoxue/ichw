@@ -1,14 +1,12 @@
 """tile.py: 对一面m*n的墙用x*y的砖进行密铺，
             打印出所有密铺方案，
             并在turtle模块上实现可视化。
-
 __author__ = "Shuoxue Li"
 __pkuid__  = "1800011839"
 __email__  = "1800011839@pku.edu.cn"
 """
 import turtle
 import sys
-import random
 sys.getrecursionlimit=100000
 
 def init_wall(m,n):
