@@ -7,6 +7,7 @@ __email__  = "1800011839@pku.edu.cn"
 """
 import turtle
 import sys
+import random
 sys.getrecursionlimit=100000
 
 def init_wall(m,n):
