@@ -49,33 +49,44 @@ def coarse_methods(wall,x,y):
     """返回所有密铺方式，但会包含一些没有完全密铺的方式，
        未完全密铺的方式会有'Note'做标记。
     """
-    a=wall.copy()
-    b=wall.copy()
-    if len(wall)==0:
-        return [[]]
-    if len(a)>0 and len(b)>0:
-        c=set_brick(a,x,y)
-        d=set_brick(b,y,x)
-        if c!=None and d!=None:
-            e=coarse_methods(a,x,y)
-            for p in e:
-                p.append(c) 
-            f=coarse_methods(b,y,x)
-            for q in f:
-                q.append(d)
-            return e+f
-        if c!=None and d==None:
-            e=coarse_methods(a,x,y)
-            for p in e:
-                p.append(c)
-            return e
-        if c==None and d!=None:
-            f=coarse_methods(b,x,y)
-            for q in f:
-                q.append(d)
-            return f
-        if c==None and d==None:
-            return[['Note']]
+    if x==y:
+        wallcopy=wall.copy()
+        if len(wallcopy)==0:
+          return [[]]
+        else:
+            b=set_brick(wallcopy,x,y)
+            a=coarse_methods(wallcopy,x,y)
+            for o in a:
+                o.append(b)
+            return [o]
+    else:
+        a=wall.copy()
+        b=wall.copy()
+        if len(wall)==0:
+            return [[]]
+        if len(a)>0 and len(b)>0:
+            c=set_brick(a,x,y)
+            d=set_brick(b,y,x)
+            if c!=None and d!=None:
+                e=coarse_methods(a,x,y)
+                for p in e:
+                    p.append(c) 
+                f=coarse_methods(b,y,x)
+                for q in f:
+                    q.append(d)
+                return e+f
+            if c!=None and d==None:
+                e=coarse_methods(a,x,y)
+                for p in e:
+                    p.append(c)
+                return e
+            if c==None and d!=None:
+                f=coarse_methods(b,x,y)
+                for q in f:
+                    q.append(d)
+                return f
+            if c==None and d==None:
+                return[['Note']]  
         
 def final_methods(wall,x,y):
     """对coarse_methods得到的粗列表筛选出未标记，即完全密铺的方式，
