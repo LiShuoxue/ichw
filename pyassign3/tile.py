@@ -169,7 +169,7 @@ def major(m,n,x,y):
     methods=final_methods(wall,x,y)
     draw_a_method(methods[random.randrange(len(methods))],m,n,x,y)
     output(m,n,x,y)
-    
+    turtle.exitonclick()
 
 def main():
     major(int(input('墙长度',)),int(input('墙宽度',)),\
