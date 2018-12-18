@@ -1,11 +1,13 @@
-"""wcount.py: 统计一篇文章中频率最高的十个词。
+"""wcount.py: 将一篇文章中的单词按照频率由大到小排序，
+并且输出前面的，输出总数由命令行的参数决定。
 __author__ = "Shuoxue Li"
 __pkuid__  = "1800011839"
 __email__  = "1800011839@pku.edu.cn"
 """
 
 import sys
-from urllib.request import urlopen
+import urllib.request
+import urllib.error
 
 def wordsearch(line,punc):
     """将文本中所有的词列入一个列表中。
@@ -24,8 +26,8 @@ def stat(line):
     """统计每个词及其出现的数目。
     """
     statdict={}
-    string=""",.?"/()-!_*—[] """
-    for x in wordsearch(line,string):
+    punc=""",.?"/()-!_*—[] """
+    for x in wordsearch(line,punc):
         statdict[x]=statdict.get(x,0)+1
     if '' in statdict:
         del statdict['']
@@ -42,14 +44,28 @@ def wcount(lines,topn=10):
         print('%s    %d'%(tuples[0],tuples[1]))
         
 if __name__ == '__main__':
+    """执行命令行的操作
+       对网页所发生错误进行指示。
+    """
     if  len(sys.argv) == 1:
         print('Usage: {} url [topn]'.format(sys.argv[0]))
         print('  url: URL of the txt file to analyze ')
         print('  topn: how many (words count) to output. If not given, will output top 10 words')
         sys.exit(1)
     else:
-        doc = urlopen(sys.argv[1])
-        docstr = doc.read()
-        doc.close()
-        jstr = docstr.decode()
-        wcount(jstr)
+        try:
+            doc = urllib.request.urlopen(sys.argv[1])
+        except urllib.error.URLError as err:
+            print('URL错误:{}'.format(str(err)))
+        except urllib.error.HTTPError as err:
+            print('HTTP错误:{}'.format(str(err)))        
+        except Exception as err:
+            print('其他错误:{}'.format(str(err)))
+        else:
+            docstr = doc.read()
+            doc.close()
+            jstr = docstr.decode()
+            if len(sys.argv) == 2:
+                wcount(jstr)
+            else:
+                wcount(jstr,int(sys.argv[2]))
